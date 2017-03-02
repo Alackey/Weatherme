@@ -1,5 +1,5 @@
 {
-  "name": "expressgen",
+  "name": "weatherme",
   "version": "0.0.1",
   "private": true,
   "main": "./server/app.js",
