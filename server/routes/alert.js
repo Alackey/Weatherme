@@ -1,11 +1,20 @@
 import express from 'express';
-import { createAlert } from '../database/db';
+import { createAlert, getUsersAlerts } from '../database/db';
 
 const router = express.Router();
 
-/* GET alerts listing. */
-router.get('/', (req, res) => {
-  res.send('display alter');
+/* GET alerts for user. */
+router.get('/:username', (req, res) => {
+  let response;
+
+  getUsersAlerts(req.params.username).then((alerts) => {
+    response = { status: 'success', Items: alerts.Items };
+  }).catch((err) => {
+    response = { status: 'error', message: err };
+  }).then(() => {
+    // Sends the response to client
+    res.json(response);
+  });
 });
 
 /* POST adds alert */
@@ -17,10 +26,7 @@ router.post('/', (req, res) => {
   createAlert(req.body).then((msg) => {
     response = { status: msg };
   }).catch((err) => {
-    response = {
-      status: 'error',
-      message: err,
-    };
+    response = { status: 'error', message: err };
   }).then(() => {
     // Sends the response to client
     res.json(response);

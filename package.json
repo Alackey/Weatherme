@@ -4,8 +4,7 @@
   "private": true,
   "main": "./server/app.js",
   "scripts": {
-    "build": "babel server -d build && node ./build/bin/www.js",
-    "start": "node ./server/bin/www",
+    "start": "babel server -d build && node ./build/bin/www.js",
     "test": "mocha --recursive test",
     "test:coverage": "nyc npm test",
     "test:unit": "mocha --recursive test/middleware test/models test/routes",
